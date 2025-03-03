@@ -21,7 +21,7 @@ class AuthController extends Controller
         try {
             $credential = request()->only('email', 'password');
             if (auth()->attempt($credential)) {
-                return redirect()->route('home');
+                return redirect()->route('dashboard');
             }
             return back()->with('error', 'Email atau password salah');
         } catch (\Throwable $th) {

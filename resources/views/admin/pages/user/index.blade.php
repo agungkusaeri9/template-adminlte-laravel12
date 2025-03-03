@@ -52,12 +52,12 @@
                                                 <td>
                                                     <a href="{{ route('users.edit', $user->id) }}"
                                                         class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
-                                                    <form class="d-inline" action="{{ route('users.destroy', $user->id) }}"
-                                                        method="post">
+                                                        <form action="javascript:void(0)" method="post" class="d-inline"
+                                                        id="formDelete">
                                                         @csrf
                                                         @method('delete')
-                                                        <button class="btn btn-danger btn-sm"><i
-                                                                class="fas fa-trash"></i></button>
+                                                        <button class="btn btnDelete btn-sm  btn-danger"
+                                                            data-action="{{ route('users.destroy', $user->id) }}"><i class="fa fa-trash"></i></button>
                                                     </form>
                                                 </td>
                                             </tr>
@@ -79,6 +79,7 @@
     </div>
 @endsection
 @include('admin.layouts.partials.toast')
+@include('admin.layouts.partials.sweetalert')
 @push('scripts')
     <script>
         $('#dtTable').DataTable();
