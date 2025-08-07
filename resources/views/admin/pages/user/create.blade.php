@@ -60,10 +60,21 @@
                                     <div class='form-group mb-3'>
                                         <label for='password' class='mb-2'>Password <span
                                                 class='text-danger small'>*</span></label>
-                                        <input type='text' name='password' id='password'
+                                        <input type='password' name='password' id='password'
                                             class='form-control @error('password') is-invalid @enderror'
                                             value='{{ old('password') }}'>
                                         @error('password')
+                                            <div class='invalid-feedback'>
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class='form-group mb-3'>
+                                        <label for='password_confirmation' class='mb-2'>Password Confirmation</label>
+                                        <input type='password' name='password_confirmation' id='password_confirmation'
+                                            class='form-control @error('password_confirmation') is-invalid @enderror'
+                                            value='{{ old('password_confirmation') }}'>
+                                        @error('password_confirmation')
                                             <div class='invalid-feedback'>
                                                 {{ $message }}
                                             </div>
@@ -85,7 +96,8 @@
                                             </div>
                                         @enderror
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group float-right">
+                                        <a href="{{ route('users.index') }}" class="btn btn-warning">Cancel</a>
                                         <button class="btn btn-primary">Save</button>
                                     </div>
                                 </form>

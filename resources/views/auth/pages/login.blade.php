@@ -56,3 +56,4 @@
         </div>
     </div>
 @endsection
+@include('admin.layouts.partials.toast')

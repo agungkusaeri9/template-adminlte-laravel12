@@ -35,7 +35,7 @@
                                 <table id="dtTable" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
+                                            <th width="5%" class="text-center">#</th>
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Role</th>
@@ -45,19 +45,20 @@
                                     <tbody>
                                         @foreach ($users as $user)
                                             <tr>
-                                                <td>{{ $loop->iteration }}</td>
+                                                <td class="text-center">{{ $loop->iteration }}</td>
                                                 <td>{{ $user->name }}</td>
                                                 <td>{{ $user->email }}</td>
                                                 <td>{{ $user->role }}</td>
                                                 <td>
                                                     <a href="{{ route('users.edit', $user->id) }}"
                                                         class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
-                                                        <form action="javascript:void(0)" method="post" class="d-inline"
+                                                    <form action="javascript:void(0)" method="post" class="d-inline"
                                                         id="formDelete">
                                                         @csrf
                                                         @method('delete')
                                                         <button class="btn btnDelete btn-sm  btn-danger"
-                                                            data-action="{{ route('users.destroy', $user->id) }}"><i class="fa fa-trash"></i></button>
+                                                            data-action="{{ route('users.destroy', $user->id) }}"><i
+                                                                class="fa fa-trash"></i></button>
                                                     </form>
                                                 </td>
                                             </tr>

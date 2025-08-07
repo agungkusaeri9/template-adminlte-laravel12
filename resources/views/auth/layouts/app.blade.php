@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ asset('assets') }}/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('assets') }}/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="{{ asset('assets') }}/plugins/toastr/toastr.min.css">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -29,6 +30,18 @@
     <script src="{{ asset('assets') }}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('assets') }}/dist/js/adminlte.min.js"></script>
+    @if (session('success'))
+        <script src="{{ asset('assets') }}/plugins/toastr/toastr.min.js"></script>
+        <script>
+            toastr.success('{{ session('success') }}', 'Success')
+        </script>
+    @endif
+    @if (session('error'))
+        <script src="{{ asset('assets') }}/plugins/toastr/toastr.min.js"></script>
+        <script>
+            toastr.error('{{ session('error') }}', 'Error')
+        </script>
+    @endif
 </body>
 
 </html>

@@ -24,7 +24,8 @@ class UserController extends Controller
         request()->validate([
             'name' => ['required'],
             'email' => ['required', 'email', 'unique:users,email'],
-            'password' => ['required', 'min:6'],
+            'password' => ['required', 'min:6', 'confirmed'],
+            'password_confirmation' => ['required', 'min:6'],
             'role' => ['required']
         ]);
         try {
@@ -49,18 +50,28 @@ class UserController extends Controller
         request()->validate([
             'name' => ['required'],
             'email' => ['required', 'email', 'unique:users,email,' . $id],
-            'password' => [Rule::when(request()->password, ['required', 'min:6'])],
-            'role' => ['required']
+            'password' => [
+                Rule::when(request()->filled('password'), function () {
+                    return ['required', 'min:6', 'confirmed'];
+                }),
+            ],
+            'password_confirmation' => [
+                Rule::when(request()->filled('password'), function () {
+                    return ['required', 'min:6'];
+                }),
+            ],
+            'role' => ['required'],
         ]);
+
         try {
-            $user  = User::findOrFail($id);
-            $data = request()->only(['name', 'email', 'role']);
+            $user = User::findOrFail($id);
+            $data = request()->only(['name', 'email', 'role', 'password']);
             if (request()->password)
                 $data['password'] = bcrypt($data['password']);
             $user->update($data);
             return redirect()->route('users.index')->with('success', 'User updated successfully');
         } catch (\Throwable $th) {
-            //throw $th;
+            // throw $th;
             return redirect()->back()->with('error', $th->getMessage());
         }
     }

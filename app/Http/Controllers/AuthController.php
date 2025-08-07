@@ -23,10 +23,16 @@ class AuthController extends Controller
             if (auth()->attempt($credential)) {
                 return redirect()->route('dashboard');
             }
-            return back()->with('error', 'Email atau password salah');
+            return back()->with('error', 'Email or password is wrong');
         } catch (\Throwable $th) {
             //throw $th;
             return back()->with('error', $th->getMessage());
         }
+    }
+
+    public function logout()
+    {
+        auth()->logout();
+        return redirect()->route('login');
     }
 }
